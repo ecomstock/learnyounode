@@ -1,7 +1,5 @@
-let sum = 0;
+// let fs = require('fs');
+// let lineBreaks = fs.readFileSync(process.argv[2]).toString().split("\n");
+// console.log(lineBreaks.length - 1);
 
-for (i=2; i < process.argv.length; i++) {
-	sum += +process.argv[i];
-}
-
-console.log(sum);
+console.log(process.argv);
