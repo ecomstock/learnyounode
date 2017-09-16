@@ -1,5 +1,5 @@
-const fs = require('fs');
-const path = require('path');
+//const fs = require('fs');
+//const path = require('path');
 const mymodule = require('./mymodule');
 
 //learnyounode task 5
@@ -10,7 +10,6 @@ function logList(err, data) {
         console.log(err);
     }
     else {
-    	//let loggableData = "";
     	for (i = 0; i < data.length; i++) {
     		console.log(data[i]);
     	}
