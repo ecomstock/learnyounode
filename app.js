@@ -1,21 +1,33 @@
 //const fs = require('fs');
 //const path = require('path');
-const mymodule = require('./mymodule');
+//const mymodule = require('./mymodule');
+const http = require('http');
+
+//learnyounode task 6
+const url = process.argv[2];
+const callback = response => {
+	response.setEncoding("utf8");
+	response.on("data", console.log)
+}
+
+http.get(url, callback)
+
+
 
 //learnyounode task 5
-let dir1 = process.argv[2];
-let ext1 = process.argv[3];
-function logList(err, data) {
-    if (err){
-        console.log(err);
-    }
-    else {
-    	for (i = 0; i < data.length; i++) {
-    		console.log(data[i]);
-    	}
-    }
-}
-mymodule(dir1, ext1, logList);
+// let dir1 = process.argv[2];
+// let ext1 = process.argv[3];
+// function logList(err, data) {
+//     if (err){
+//         console.log(err);
+//     }
+//     else {
+//     	for (i = 0; i < data.length; i++) {
+//     		console.log(data[i]);
+//     	}
+//     }
+// }
+// mymodule(dir1, ext1, logList);
 
 //learnyounode task 4
 // let dir = process.argv[2];
