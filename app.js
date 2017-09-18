@@ -4,16 +4,53 @@
 const http = require('http');
 const concatStream = require('concat-stream');
 
-//learnyounode task 7
-const url = process.argv[2];
-const callback = response => {
+//learnyounode task 8
+const url1 = process.argv[2];
+const url2 = process.argv[3];
+const url3 = process.argv[4];
+
+const callback1 = response => {
 	response.pipe(concatStream(function(data) {
-		console.log(data.toString().length);
 		console.log(data.toString());
 	}))
 }
 
-http.get(url, callback)
+const callback2 = response => {
+	response.pipe(concatStream(function(data) {
+		console.log(data.toString());
+	}))
+}
+
+const callback3 = response => {
+	response.pipe(concatStream(function(data) {
+		console.log(data.toString());
+	}))
+}
+
+const metaCallback = (myfunc, another, yetAnother) => {
+	http.get(url1, myfunc);
+	http.get(url2, another);
+	http.get(url3, yetAnother);
+}
+
+metaCallback(callback1, callback2, callback3);
+
+
+
+
+
+
+
+// //learnyounode task 7
+// const url = process.argv[2];
+// const callback = response => {
+// 	response.pipe(concatStream(function(data) {
+// 		console.log(data.toString().length);
+// 		console.log(data.toString());
+// 	}))
+// }
+
+// http.get(url, callback)
 
 //learnyounode task 6
 // const url = process.argv[2];
