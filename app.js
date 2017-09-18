@@ -2,17 +2,26 @@
 //const path = require('path');
 //const mymodule = require('./mymodule');
 const http = require('http');
+const concatStream = require('concat-stream');
 
-//learnyounode task 6
+//learnyounode task 7
 const url = process.argv[2];
 const callback = response => {
-	response.setEncoding("utf8");
-	response.on("data", console.log)
+	response.pipe(concatStream(function(data) {
+		console.log(data.toString().length);
+		console.log(data.toString());
+	}))
 }
 
 http.get(url, callback)
 
-
+//learnyounode task 6
+// const url = process.argv[2];
+// const callback = response => {
+// 	response.setEncoding("utf8");
+// 	response.on("data", console.log)
+// }
+// http.get(url, callback)
 
 //learnyounode task 5
 // let dir1 = process.argv[2];
