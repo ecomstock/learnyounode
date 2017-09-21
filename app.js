@@ -3,42 +3,30 @@
 //const mymodule = require('./mymodule');
 const http = require('http');
 const concatStream = require('concat-stream');
-
-//learnyounode task 8
-const url1 = process.argv[2];
-const url2 = process.argv[3];
-const url3 = process.argv[4];
-
-const callback1 = response => {
-	response.pipe(concatStream(function(data) {
-		console.log(data.toString());
-	}))
+let results = []
+let count = 0
+ 
+function printResults () {
+  for (var i = 0; i < 3; i++)
+    console.log(results[i])
 }
-
-const callback2 = response => {
-	response.pipe(concatStream(function(data) {
-		console.log(data.toString());
-	}))
+ 
+function httpGet (index) {
+  http.get(process.argv[2 + index], function (response) {
+    response.pipe(concatStream(function(data) {
+      
+      results[index] = data.toString()
+      count++
+ 
+      if (count === 3)
+        printResults()
+    }))
+  })
 }
-
-const callback3 = response => {
-	response.pipe(concatStream(function(data) {
-		console.log(data.toString());
-	}))
+ 
+for (let i = 0; i < 3; i++) {
+  httpGet(i)
 }
-
-const metaCallback = (myfunc, another, yetAnother) => {
-	http.get(url1, myfunc);
-	http.get(url2, another);
-	http.get(url3, yetAnother);
-}
-
-metaCallback(callback1, callback2, callback3);
-
-
-
-
-
 
 
 // //learnyounode task 7
