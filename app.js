@@ -1,32 +1,54 @@
 //const fs = require('fs');
 //const path = require('path');
 //const mymodule = require('./mymodule');
-const http = require('http');
-const concatStream = require('concat-stream');
-let results = []
-let count = 0
- 
-function printResults () {
-  for (var i = 0; i < 3; i++)
-    console.log(results[i])
+//const http = require('http');
+//const concatStream = require('concat-stream');
+
+//learnyounode task 9
+const net = require ('net');
+let port = process.argv[2];
+
+function addZeroTo(numberInDate) {
+	return (numberInDate < 10 ? '0' : '') + numberInDate;
 }
+
+function currently() {
+	let date = new Date;
+	return `${addZeroTo(date.getFullYear())}-${addZeroTo(date.getMonth() + 1)}-${addZeroTo(date.getDate())} ${addZeroTo(date.getHours())}:${addZeroTo(date.getMinutes())}`;
+}
+
+let server = net.createServer(connection => {
+	connection.end(currently() + '\n');
+})
+
+server.listen(Number(port));
+
+
+// //learnyounode task 8
+// let results = []
+// let count = 0
+
+// function printResults () {
+//   for (var i = 0; i < 3; i++)
+//     console.log(results[i])
+// }
  
-function httpGet (index) {
-  http.get(process.argv[2 + index], function (response) {
-    response.pipe(concatStream(function(data) {
+// function httpGet (index) {
+//   http.get(process.argv[2 + index], function (response) {
+//     response.pipe(concatStream(function(data) {
       
-      results[index] = data.toString()
-      count++
+//       results[index] = data.toString()
+//       count++
  
-      if (count === 3)
-        printResults()
-    }))
-  })
-}
+//       if (count === 3)
+//         printResults()
+//     }))
+//   })
+// }
  
-for (let i = 0; i < 3; i++) {
-  httpGet(i)
-}
+// for (let i = 0; i < 3; i++) {
+//   httpGet(i)
+// }
 
 
 // //learnyounode task 7
