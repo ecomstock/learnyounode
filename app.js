@@ -4,24 +4,38 @@
 //const http = require('http');
 //const concatStream = require('concat-stream');
 
-//learnyounode task 9
-const net = require ('net');
+//learnyounode task 10
+const http = require('http');
+const fs = require('fs');
 let port = process.argv[2];
+let filePath = process.argv[3];
 
-function addZeroTo(numberInDate) {
-	return (numberInDate < 10 ? '0' : '') + numberInDate;
-}
-
-function currently() {
-	let date = new Date;
-	return `${addZeroTo(date.getFullYear())}-${addZeroTo(date.getMonth() + 1)}-${addZeroTo(date.getDate())} ${addZeroTo(date.getHours())}:${addZeroTo(date.getMinutes())}`;
-}
-
-let server = net.createServer(connection => {
-	connection.end(currently() + '\n');
+let server = http.createServer((request, response) => {
+	fs.createReadStream(filePath).pipe(response)
 })
 
 server.listen(Number(port));
+
+
+
+// //learnyounode task 9
+// const net = require('net');
+// let port = process.argv[2];
+
+// function addZeroTo(numberInDate) {
+// 	return (numberInDate < 10 ? '0' : '') + numberInDate;
+// }
+
+// function currently() {
+// 	let date = new Date;
+// 	return `${addZeroTo(date.getFullYear())}-${addZeroTo(date.getMonth() + 1)}-${addZeroTo(date.getDate())} ${addZeroTo(date.getHours())}:${addZeroTo(date.getMinutes())}`;
+// }
+
+// let server = net.createServer(connection => {
+// 	connection.end(currently() + '\n');
+// })
+
+// server.listen(Number(port));
 
 
 // //learnyounode task 8
