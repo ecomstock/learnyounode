@@ -4,17 +4,36 @@
 //const http = require('http');
 //const concatStream = require('concat-stream');
 
-//learnyounode task 10
+//learnyounode task 11
 const http = require('http');
-const fs = require('fs');
-let port = process.argv[2];
-let filePath = process.argv[3];
+const map = require('through2-map');
+const port = process.argv[2];
 
 let server = http.createServer((request, response) => {
-	fs.createReadStream(filePath).pipe(response)
+	request.pipe(map(chunk => {
+		return chunk.toString().toUpperCase()
+	})).pipe(response)
 })
 
 server.listen(Number(port));
+
+
+// inStream.pipe(map(chunk => {
+// 	return chunk.toString().split('').reverse().join('')
+// })).pipe(outStream)
+
+
+// //learnyounode task 10
+// const http = require('http');
+// const fs = require('fs');
+// let port = process.argv[2];
+// let filePath = process.argv[3];
+
+// let server = http.createServer((request, response) => {
+// 	fs.createReadStream(filePath).pipe(response)
+// })
+
+// server.listen(Number(port));
 
 
 
